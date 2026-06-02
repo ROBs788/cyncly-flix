@@ -4,22 +4,20 @@ import Logo from './Logo';
 import './App.css';
 
 export default function App() {
-  const [movies, setMovies] = useState<Movie[]>([]); // Começa vazio para o skeleton aparecer
+  const [movies, setMovies] = useState<Movie[]>([]); 
   const [search, setSearch] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(true); // Começa em true para carregar na abertura
+  const [loading, setLoading] = useState<boolean>(true); 
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
-  // SIMULA CARREGAMENTO INICIAL DO SITE
   useEffect(() => {
     const timer = setTimeout(() => {
       setMovies(BANCO_DE_DADOS_FILMES);
       setLoading(false);
-    }, 1500); // 1.5 segundos de loading ao abrir a página
+    }, 1500); 
 
     return () => clearTimeout(timer);
   }, []);
 
-  // FUNÇÃO DE BUSCA (TAMBÉM COM TEMPO AJUSTADO)
   const fetchMovies = (query: string) => {
     setLoading(true);
     
@@ -33,7 +31,7 @@ export default function App() {
         setMovies(filtrados);
       }
       setLoading(false);
-    }, 1200); // 1.2 segundos nas buscas
+    }, 1200); 
   };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -41,7 +39,7 @@ export default function App() {
     fetchMovies(search);
   };
 
-  const heroMovie = movies[0]; // Pega o primeiro filme do array atual para o banner
+  const heroMovie = movies[0]; 
 
   return (
     <div className="container">
@@ -85,7 +83,7 @@ export default function App() {
               <p className="text-status">No movies found for this search.</p>
             ) : (
               <>
-                {/* HERO BANNER DINÂMICO */}
+                
                 {heroMovie && !search && (
                   <section className="hero">
                     <div className="hero-bg">
@@ -128,7 +126,7 @@ export default function App() {
         )}
       </main>
 
-      {/* MODAL DE DETALHES */}
+      
       {selectedMovie && (
         <div className="modal-overlay" onClick={() => setSelectedMovie(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
